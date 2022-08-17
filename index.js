@@ -20,6 +20,8 @@ http.createServer((req, res) => {
     // get seed or use a random number
     const params = new URLSearchParams(req.url.split("?").pop())
     const seed = parseInt(params.get("seed")) || Math.random()
+    const numberOfSeeds = parseInt(params.get("seeds")) || 10
+    const watermelonRotation = (params.get("rotation") || 45) * (Math.PI / 180)
 
     const generator = seedrandom(seed);
 
@@ -38,7 +40,7 @@ http.createServer((req, res) => {
 
     // go to position
     ctx.translate(width / 2, height / 2)
-    ctx.rotate(Math.PI / 4)
+    ctx.rotate(watermelonRotation)
 
     // draw watermelon shell
     ctx.fillStyle = "#fcf3d7"
@@ -59,7 +61,7 @@ http.createServer((req, res) => {
     ctx.fill()
 
     // draw random seeds
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < numberOfSeeds; i++) {
         const r = generator() * (radius - 6 - margin * 2) + 10
         const angle = -generator() * (Math.PI * 2 - Math.PI) + Math.PI
 
