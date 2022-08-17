@@ -11,10 +11,6 @@ const palettes = require("nice-color-palettes")
 const radius = 150;
 const margin = 15;
 
-// create canvas
-const watermelon = canvas.createCanvas(500, 500)
-const ctx = watermelon.getContext("2d")
-
 // create http server
 http.createServer((req, res) => {
     // get seed or use a random number
@@ -26,6 +22,8 @@ http.createServer((req, res) => {
     const generator = seedrandom(seed);
 
     // create canvas
+    const watermelon = canvas.createCanvas(500, 500)
+    const ctx = watermelon.getContext("2d")
     const { width, height } = watermelon
 
     ctx.save()
